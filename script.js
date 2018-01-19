@@ -3,19 +3,21 @@
 
   console.log('Wow wow wow');
 
+  const arr = ['\\(\\pi\\)'];
   const game = {
     startTime: null,
     result: document.getElementById('result'),
     ans: document.getElementById('answer'),
     prob: document.getElementById('problem'),
+    expr: arr[0],
     start: function () {
       game.startTime = new Date().getTime();
-      game.prob.innerText = 'hoge';
+      game.prob.innerText = game.expr;
       game.ans.onkeyup = game.judge;
     },
     judge: function () {
       console.log('ye');
-      if (game.ans.value === game.prob.innerText){
+      if ('\\(' + game.ans.value + '\\)' === game.expr){
         game.stop();
       }
     },
@@ -26,7 +28,7 @@
     }
   };
 
-    game.ans.focus();
-    game.start();
+  game.ans.focus();
+  game.start();
   
 })();
