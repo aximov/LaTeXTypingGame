@@ -8,27 +8,25 @@
     result: document.getElementById('result'),
     ans: document.getElementById('answer'),
     prob: document.getElementById('problem'),
-    start: function (){
+    start: function () {
       game.startTime = new Date().getTime();
       game.prob.innerText = 'hoge';
       game.ans.onkeyup = game.judge;
     },
-    judge: function (){
+    judge: function () {
       console.log('ye');
       if (game.ans.value === game.prob.innerText){
-        stop;
-        console.log('judge matched');
+        game.stop();
       }
     },
-    stop: function (){
-      console.log('stop');
+    stop: function () {
       let currentTime = new Date().getTime();
       let seconds = (currentTime - game.startTime) / 1000;
       game.result.innerText = seconds + ' s';
     }
   };
 
-  if (confirm('OK?')) {
+    game.ans.focus();
     game.start();
-  }
+  
 })();
