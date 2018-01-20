@@ -10,26 +10,36 @@
     ans: document.getElementById('answer'),
     prob: document.getElementById('problem'),
     ex: document.getElementById('example'),
+    correct: document.getElementById('correct'),
     rand: null,
     expr: null,
+    clock: null,
+    watcher: null,
     start: function () {
       game.rand = Math.floor(Math.random()*arr.length);
       game.expr = arr[game.rand];
       game.startTime = new Date().getTime();
       game.prob.innerText = '\\(' + game.expr + '\\)';
       game.ex.innerText = game.expr;
+      game.clock = setInterval(game.update, 1);
       game.ans.onkeyup = game.judge;
     },
+    update: function () {
+      var currentTime = new Date().getTime();
+      var seconds = (currentTime - game.startTime) / 1000;
+      game.result.innerText = seconds + ' s';
+    },
     judge: function () {
-      console.log('ye');
-      if (game.ans.value === game.expr){
+      console.log('judging');
+      if (game.ans.value !== '' && game.ans.value === game.expr){
         game.stop();
       }
     },
     stop: function () {
-      let currentTime = new Date().getTime();
-      let seconds = (currentTime - game.startTime) / 1000;
-      game.result.innerText = seconds + ' s';
+      console.log('stop!');
+      clearInterval(game.clock);
+      game.correct.innerHTML = '<span  class="badge badge-success">Correct!</span>';
+      game.ans.onkeyup = null;
     }
   };
 
